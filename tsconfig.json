@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "es6",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "paths": {
+      "@usecases/*": ["./src/usecases/*"],
+      "@infrastructures/*": ["./src/infrastructures/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@config/*": ["./src/config/*"]
+    }
+  }
+}

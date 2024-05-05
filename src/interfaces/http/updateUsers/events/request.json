@@ -1,0 +1,8 @@
+{
+  "body": {
+    "is_confirmed": true
+  },
+  "headers": {
+    "x-tenant-id": "123"
+  }
+}

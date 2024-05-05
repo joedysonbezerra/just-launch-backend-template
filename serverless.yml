@@ -1,0 +1,42 @@
+service: justlaunch-users
+frameworkVersion: '3'
+
+plugins:
+  - serverless-bundle
+  - serverless-iam-roles-per-function
+
+provider:
+  name: aws
+  region: sa-east-1
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'staging'}
+  timeout: 29 # defaults to maximum that API Gateway allows
+  logs:
+    restApi: true
+  environment:
+    APPLICATION_NAME: ${self:service}
+    LOG_LEVEL: error
+    USERS_TABLE: !Ref UsersTable
+    SUPABASE_URL:
+    SUPABASE_API_KEY:
+    STRIPE_API_KEY:
+    STRIPE_WEBHOOK_KEY:
+
+custom:
+  bundle:
+    excludeFiles: '**/*.test.ts'
+    aliases:
+      - '@usecases': src/usecases
+      - '@infrastructures': src/infrastructures
+      - '@interfaces': src/interfaces
+      - '@domain': src/domain
+      - '@utils': src/utils
+
+functions:
+  - ${file(src/interfaces/http/functions.yml)}
+
+resources:
+  #DynamoDB
+  - ${file(resources/dynamodb/databases.yml)}
+  # Outputs
+  - ${file(resources/outputs/outputs.yml)}

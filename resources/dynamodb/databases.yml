@@ -1,0 +1,49 @@
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: created_at
+          AttributeType: S
+        - AttributeName: tenant_id
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: customer_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: created_at
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: TenantIdCreatedAtIndex
+          KeySchema:
+            - AttributeName: tenant_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: 'ALL'
+        - IndexName: EmailCreatedAtIndex
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: 'ALL'
+        - IndexName: CustomerIdCreatedAtIndex
+          KeySchema:
+            - AttributeName: customer_id
+              KeyType: HASH
+            - AttributeName: created_at
+              KeyType: RANGE
+          Projection:
+            ProjectionType: 'ALL'
+      BillingMode: PAY_PER_REQUEST
