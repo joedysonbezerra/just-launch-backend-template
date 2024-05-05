@@ -2,7 +2,7 @@ createUsers:
   handler: src/interfaces/http/createUsers/index.main
   events:
     - http:
-        path: ${self:provider.stage}/users
+        path: /users
         method: post
         authorizer: aws_iam
   iamRoleStatements:
@@ -15,7 +15,7 @@ updateUsers:
   handler: src/interfaces/http/updateUsers/index.main
   events:
     - http:
-        path: ${self:provider.stage}/users
+        path: /users
         method: put
         authorizer: aws_iam
   iamRoleStatements:
@@ -28,7 +28,7 @@ deleteUsers:
   handler: src/interfaces/http/deleteUsers/index.main
   events:
     - http:
-        path: ${self:provider.stage}/users/{id}
+        path: /users/{id}
         method: delete
         authorizer: aws_iam
   iamRoleStatements:
@@ -41,7 +41,7 @@ findUserByTenantId:
   handler: src/interfaces/http/findUserByTenantId/index.main
   events:
     - http:
-        path: ${self:provider.stage}/users/{id}
+        path: /users/{id}
         method: get
         authorizer: aws_iam
   iamRoleStatements:
@@ -53,7 +53,7 @@ receiveStripeEvents:
   handler: src/interfaces/http/receiveStripeEvents/index.main
   events:
     - http:
-        path: ${self:provider.stage}/users/stripe/events
+        path: /users/stripe/events
         method: post
         cors: true
   iamRoleStatements:
