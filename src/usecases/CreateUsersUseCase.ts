@@ -1,6 +1,5 @@
 import { IAuthService } from '@domain/contracts/infrastructures/IAuthService';
-import { IEmailMarketingService } from '@domain/contracts/infrastructures/IEmailMarketingService';
-import { IPaymentGatewayService } from '@domain/contracts/infrastructures/IPaymentGatewayService';
+// import { IPaymentGatewayService } from '@domain/contracts/infrastructures/IPaymentGatewayService';
 import { IUsersRepository } from '@domain/contracts/infrastructures/IUsersRepository';
 import { ICreateUsersUseCase } from '@domain/contracts/usecases/ICreateUsersUseCase';
 import { RequestToCreateUsersDTO } from '@domain/dtos/RequestToCreateUsersDTO';
@@ -20,12 +19,10 @@ export class CreateUsersUseCase implements ICreateUsersUseCase {
     private logger: ILogger,
     @inject('AuthService')
     private authService: IAuthService,
-    @inject('PaymentGatewayService')
-    private paymentGatewayService: IPaymentGatewayService,
+    // @inject('PaymentGatewayService')
+    // private paymentGatewayService: IPaymentGatewayService,
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository<User>,
-    @inject('EmailMarketingService')
-    private emailMarketingService: IEmailMarketingService
+    private usersRepository: IUsersRepository<User>
   ) {
     this.className = 'CreateUsersUseCase';
   }
@@ -50,21 +47,21 @@ export class CreateUsersUseCase implements ICreateUsersUseCase {
 
     const uuid = User.generateId();
 
-    const paymentGatewayResult = await this.paymentGatewayService.createCustomer({
-      ...data,
-      userId: uuid,
-      tenantId: authResult.data,
-    });
+    // const paymentGatewayResult = await this.paymentGatewayService.createCustomer({
+    //   ...data,
+    //   userId: uuid,
+    //   tenantId: authResult.data,
+    // });
 
-    if (paymentGatewayResult.isError) {
-      this.logger.error('Error on execute - PaymentGatewayService', paymentGatewayResult.errorMessage, {
-        context,
-      });
+    // if (paymentGatewayResult.isError) {
+    //   this.logger.error('Error on execute - PaymentGatewayService', paymentGatewayResult.errorMessage, {
+    //     context,
+    //   });
 
-      await this.authService.deleteUser(authResult.data);
+    //   await this.authService.deleteUser(authResult.data);
 
-      return paymentGatewayResult;
-    }
+    //   return paymentGatewayResult;
+    // }
 
     const userDomain = User.fromPlain(User, {
       id: uuid,
@@ -74,7 +71,7 @@ export class CreateUsersUseCase implements ICreateUsersUseCase {
       subscriptionStatus: SubscriptionStatus.PENDING,
       tenantId: authResult.data,
       referralId: buildReferralId(),
-      customerId: paymentGatewayResult.data,
+      customerId: uuid, // paymentGatewayResult.data,
     });
 
     const result = await this.usersRepository.upsert(userDomain);
@@ -84,12 +81,10 @@ export class CreateUsersUseCase implements ICreateUsersUseCase {
       });
 
       await this.authService.deleteUser(authResult.data);
-      await this.paymentGatewayService.deleteCustomer(paymentGatewayResult.data);
+      // await this.paymentGatewayService.deleteCustomer(paymentGatewayResult.data);
 
       return result;
     }
-
-    await this.emailMarketingService.createContacts(userDomain);
 
     this.logger.info('Successful execution', {
       context,

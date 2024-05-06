@@ -19,8 +19,8 @@ provider:
     USERS_TABLE: !Ref UsersTable
     SUPABASE_URL:
     SUPABASE_API_KEY:
-    STRIPE_API_KEY:
-    STRIPE_WEBHOOK_KEY:
+    STRIPE_API_KEY: fake-api-key
+    STRIPE_WEBHOOK_KEY: fake-webhook-key
 
 custom:
   bundle:
