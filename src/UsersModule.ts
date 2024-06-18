@@ -1,4 +1,5 @@
 import { Settings } from '@config/Settings';
+import { BrevoService } from '@infrastructures/brevo/BrevoService';
 import { UserModel } from '@infrastructures/dynamoDB/models/UserModel';
 import { UsersRepository } from '@infrastructures/repositories/UsersRepository';
 import { StripeService } from '@infrastructures/stripe/StripeService';
@@ -48,6 +49,7 @@ container.bind('UserModel').to(UserModel).inSingletonScope();
 container.bind('UsersRepository').to(UsersRepository).inSingletonScope();
 container.bind('AuthService').to(SupabaseService).inSingletonScope();
 container.bind('PaymentGatewayService').to(StripeService).inSingletonScope();
+container.bind('EmailMarketingService').to(BrevoService).inSingletonScope();
 
 // Function
 container.bind('CreateUsersController').to(CreateUsersController).inSingletonScope();

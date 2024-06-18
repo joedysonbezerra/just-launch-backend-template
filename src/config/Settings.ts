@@ -14,6 +14,8 @@ const baseSchema = {
   supabaseApiKey: yup.string().required(),
   stripeApiKey: yup.string().required(),
   stripeWebhookKey: yup.string().required(),
+  brevoApiKey: yup.string().required(),
+  brevoUrl: yup.string().required(),
 };
 
 const productionSchema = {

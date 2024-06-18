@@ -1,4 +1,5 @@
 import { IAuthService } from '@domain/contracts/infrastructures/IAuthService';
+// import { IEmailMarketingService } from '@domain/contracts/infrastructures/IEmailMarketingService';
 // import { IPaymentGatewayService } from '@domain/contracts/infrastructures/IPaymentGatewayService';
 import { IUsersRepository } from '@domain/contracts/infrastructures/IUsersRepository';
 import { ICreateUsersUseCase } from '@domain/contracts/usecases/ICreateUsersUseCase';
@@ -21,6 +22,8 @@ export class CreateUsersUseCase implements ICreateUsersUseCase {
     private authService: IAuthService,
     // @inject('PaymentGatewayService')
     // private paymentGatewayService: IPaymentGatewayService,
+    // @inject('EmailMarketingService')
+    // private emailMarketingService: IEmailMarketingService,
     @inject('UsersRepository')
     private usersRepository: IUsersRepository<User>
   ) {
@@ -85,6 +88,8 @@ export class CreateUsersUseCase implements ICreateUsersUseCase {
 
       return result;
     }
+
+    // await this.emailMarketingService.createContacts(userDomain);
 
     this.logger.info('Successful execution', {
       context,

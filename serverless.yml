@@ -21,6 +21,8 @@ provider:
     SUPABASE_API_KEY:
     STRIPE_API_KEY: fake-api-key
     STRIPE_WEBHOOK_KEY: fake-webhook-key
+    BREVO_API_KEY: fake-api-key
+    BREVO_URL: https://api.brevo.com/v3
 
 custom:
   bundle:
