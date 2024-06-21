@@ -1,6 +1,0 @@
-Outputs:
-  UsersTable:
-    Description: Users Table
-    Value: !Ref UsersTable
-    Export:
-      Name: !Sub '${AWS::StackName}-UsersTable'

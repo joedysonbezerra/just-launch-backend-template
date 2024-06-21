@@ -1,15 +1,17 @@
-# Users Serverless Project
+# Template JustLaunch Serverless Project
 
 ![serverless](http://public.serverless.com/badges/v3.svg)
 ![Made using Typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=purple)
 
-This repository contains the user serverless project.
+This repository contains the template JustLaunch serverless project.
 
 ## How to use this template
 
 ```bash
-$ serverless create --template-url https://github.com/kernel-software-studio/template-serverless-project.git --path name_of_project
+$ serverless create --template-url https://github.com/joedysonbezerra/just-launch-backend-template.git --path name_of_project
 ```
+
+## Docs
 
 ## 💻 Requirements
 
@@ -30,7 +32,7 @@ $ aws configure
 ```
 AWS Access Key ID [None]: ${YOUR_ACCESS_KEY_ID}
 AWS Secret Access Key [None]: ${YOUR_SECRET_ACCESS_KEY}
-Default region name [None]: sa-east-1
+Default region name [None]: eu-north-1
 Default output format [None]: ENTER
 ```
 
@@ -53,7 +55,7 @@ $ npm install
 You can invoke any function locally by using the following command:
 
 ```bash
-serverless invoke local --function ${FUNCTION_NAME} --stage ${STAGE} -p src/interfaces/http/${FUNCTION_NAME}/events/request.json --aws-profile timetosend
+serverless invoke local --function ${FUNCTION_NAME} --stage ${STAGE} -p src/applications/http/${FUNCTION_NAME}/events/request.json
 ```
 
 ### Deployment

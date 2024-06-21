@@ -1,4 +1,4 @@
-service: justlaunch-users
+service: justlaunch-back-end-template
 frameworkVersion: '3'
 
 plugins:
@@ -16,13 +16,7 @@ provider:
   environment:
     APPLICATION_NAME: ${self:service}
     LOG_LEVEL: error
-    USERS_TABLE: !Ref UsersTable
-    SUPABASE_URL:
-    SUPABASE_API_KEY:
-    STRIPE_API_KEY: fake-api-key
-    STRIPE_WEBHOOK_KEY: fake-webhook-key
-    BREVO_API_KEY: fake-api-key
-    BREVO_URL: https://api.brevo.com/v3
+    EXAMPLE_TABLE: !Ref ExamplesTable
 
 custom:
   bundle:
@@ -30,15 +24,13 @@ custom:
     aliases:
       - '@usecases': src/usecases
       - '@infrastructures': src/infrastructures
-      - '@interfaces': src/interfaces
+      - '@applications': src/applications
       - '@domain': src/domain
       - '@utils': src/utils
 
 functions:
-  - ${file(src/interfaces/http/functions.yml)}
+  - ${file(src/applications/http/functions.yml)}
 
 resources:
   #DynamoDB
   - ${file(resources/dynamodb/databases.yml)}
-  # Outputs
-  - ${file(resources/outputs/outputs.yml)}

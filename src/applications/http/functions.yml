@@ -1,0 +1,38 @@
+upsertExamples:
+  handler: src/applications/http/upsertExamples/index.main
+  events:
+    - http:
+        path: /examples
+        method: post
+        authorizer: aws_iam
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:Query
+      Resource: [!GetAtt ExamplesTable.Arn, !Join ['/', [!GetAtt ExamplesTable.Arn, index/*]]]
+deleteExamples:
+  handler: src/applications/http/deleteExamples/index.main
+  events:
+    - http:
+        path: /examples/{id}
+        method: delete
+        authorizer: aws_iam
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - dynamodb:Query
+        - dynamodb:DeleteItem
+      Resource: [!GetAtt ExamplesTable.Arn, !Join ['/', [!GetAtt ExamplesTable.Arn, index/*]]]
+findExample:
+  handler: src/applications/http/findExample/index.main
+  events:
+    - http:
+        path: /examples/{id}
+        method: get
+        authorizer: aws_iam
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - dynamodb:Query
+      Resource: [!GetAtt ExamplesTable.Arn, !Join ['/', [!GetAtt ExamplesTable.Arn, index/*]]]

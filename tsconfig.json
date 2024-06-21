@@ -19,7 +19,7 @@
     "paths": {
       "@usecases/*": ["./src/usecases/*"],
       "@infrastructures/*": ["./src/infrastructures/*"],
-      "@interfaces/*": ["./src/interfaces/*"],
+      "@applications/*": ["src/applications/*"],
       "@domain/*": ["./src/domain/*"],
       "@utils/*": ["./src/utils/*"],
       "@config/*": ["./src/config/*"]

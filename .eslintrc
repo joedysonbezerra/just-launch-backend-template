@@ -25,7 +25,13 @@
         "project": "./tsconfig.json"
       },
       "alias": {
-        "map": [["@usecases", "./src/usecases"],["@infrastructures", "./src/infrastructures"],["@interfaces", "./src/interfaces"],["@domain", "./src/domain"],["@utils", "./src/utils"]],
+        "map": [
+          ["@usecases", "./src/usecases"],
+          ["@infrastructures", "./src/infrastructures"],
+          ["@applications", "./src/applications"],
+          ["@domain", "./src/domain"],
+          ["@utils", "./src/utils"]
+        ],
         "extensions": [".ts", ".js", ".json"]
       }
     }
@@ -49,7 +55,7 @@
     "no-return-await": "error",
     "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
-    "class-methods-use-this":"off",
-    "max-classes-per-file":"off"
+    "class-methods-use-this": "off",
+    "max-classes-per-file": "off"
   }
 }
